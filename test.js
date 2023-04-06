@@ -1,169 +1,56 @@
-// strings
-let length = text.length;
+const cars = ["Saab", "Volvo", "BMW"];
+const _cars = new Array("Saab", "Volvo", "BMW");
 
-// A safer way to break up a string, is to use string addition:
-document.getElementById("demo").innerHTML = "Hello " + "Dolly!";
+// For simplicity, readability and execution speed, use the array literal method.
 
-// The \ method is not the preferred method. It might not have universal support.
-// Some browsers do not allow spaces behind the \ character.
+// Arrays are Objects
+// You can have objects in an Array. You can have functions in an Array. You can have arrays in an Array
 
-// When using the === operator, x and y are not equal:
-let x = "John";
-let y = new String("John");
+cars.length; // Returns the number of elements
+cars.sort(); // Sorts the array
 
-let _x = new String("John");
-let _y = new String("John");
-(_x == _y); // false
-(_x === _y); // false
-// Comparing two JavaScript objects always returns false.
+fruits.push("Lemon"); // Adds a new element (Lemon) to fruits
 
-// String length
-// String slice()
-// String substring()
-// String substr()
-// String replace()
-// String replaceAll()
-// String toUpperCase()
-// String toLowerCase()
-// String concat()
-// String trim()
-// String trimStart()
-// String trimEnd()
-// String padStart()
-// String padEnd()
-// String charAt()
-// String charCodeAt()
-// String split()
+// JavaScript does not support arrays with named indexes.
+// In JavaScript, arrays always use numbered indexes.
 
-let text = "Apple, Banana, Kiwi";
-let part = text.slice(-12, -6); // Banana
+// If you use named indexes, JavaScript will redefine the array to an object.
+// After that, some array methods and properties will produce incorrect results.
 
-// substring() is similar to slice().
-// The difference is that start and end values less than 0 are treated as 0 in substring().
+// In JavaScript, arrays use numbered indexes.
+// In JavaScript, objects use named indexes.
+// Arrays are a special kind of objects, with numbered indexes.
 
-// substr() is similar to slice().
+// JavaScript has a built-in array constructor new Array().
+// But you can safely use [] instead.
+// Create an array with 40 undefined elements:
+const points = new Array(40);
 
-let _text = "Please visit Microsoft!";
-let newText = _text.replace("Microsoft", "W3Schools");
-// The replace() method does not change the string it is called on.
-// The replace() method returns a new string.
-// The replace() method replaces only the first match
-// If you want to replace all matches, use a regular expression with the /g flag set.
+// A common question is: How do I know if a variable is an array?
+Array.isArray(fruits);
+fruits instanceof Array;
 
-// To replace case insensitive, use a regular expression with an /i flag (insensitive):
-let _newText = text.replace(/MICROSOFT/i, "W3Schools");
-// Regular expressions are written without quotes.
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.toString(); // Banana,Orange,Apple,Mango
+document.getElementById("demo").innerHTML = fruits.join(" * "); // Banana * Orange * Apple * Mango
 
-// To replace all matches, use a regular expression with a /g flag (global match):
-let __newText = text.replace(/Microsoft/g, "W3Schools");
+// The pop() method removes the last element from an array
 
-text = text.replaceAll("cats", "dogs");
-text = text.replaceAll(/cats/g, "dogs");
-// replaceAll() does not work in Internet Explorer.
+// The push() method adds a new element to an array (at the end)
+// The push() method returns the new array length
 
-text2 = text1.toUpperCase();
-text2 = text1.toLowerCase();
+// The shift() method removes the first array element and "shifts" all other elements to a lower index
 
-let text1 = "Hello";
-let text2 = "World";
-let text3 = text1.concat(" ", text2);
+// The unshift() method adds a new element to an array (at the beginning), and "unshifts" older elements
+// The unshift() method returns the new array length
 
-// Strings are immutable: Strings cannot be changed, only replaced.
+fruits[fruits.length] = "Kiwi";
 
-text2 = text1.trim();
-text2 = text1.trimStart();
-text2 = text1.trimEnd();
+// Array elements can be deleted using the JavaScript operator delete.
+// Using delete leaves undefined holes in the array.
+// Use pop() or shift() instead.
+delete fruits[0];
 
-text = "5";
-let padded = text.padStart(4, "0"); // 0005
-
-let numb = 5;
-text = numb.toString();
-
-// padStart() padEnd() is not supported in Internet Explorer.
-
-text = "5";
-padded = text.padEnd(4, "0"); // 5000
-
-// There are 3 methods for extracting string characters:
-// charAt(position)
-// charCodeAt(position)
-// Property access [ ]
-
-text = "HELLO WORLD";
-let char = text.charAt(0); // H
-char = text.charCodeAt(0); // 72
-
-// Property access might be a little unpredictable:
-// It makes strings look like arrays (but they are not)
-// If no character is found, [ ] returns undefined, while charAt() returns an empty string.
-// It is read only. str[0] = "A" gives no error (but does not work!)
-
-text[0] = "A"; // Gives no error, but does not work
-
-// If the separator is "", the returned array will be an array of single characters:
-const arr = text.split("");
-
-
-// String Search Methods
-// String indexOf()
-// String lastIndexOf()
-// String search()
-// String match()
-// String matchAll()
-// String includes()
-// String startsWith()
-// String endsWith()
-
-// The indexOf() method returns the index (position) the first occurrence of a string in a string
-// The lastIndexOf() method returns the index of the last occurrence of a specified text in a string
-// Both indexOf(), and lastIndexOf() return -1 if the text is not found
-// Both methods accept a second parameter as the starting position for the search
-let index = text.indexOf("locate", 15);
-
-// The search() method searches a string for a string (or a regular expression) and returns the position of the match
-text.search(/locate/);
-
-// The search() method cannot take a second start position argument.
-// The indexOf() method cannot take powerful search values (regular expressions).
-
-// The match() method returns an array containing the results of matching a string against a string (or a regular expression).
-// Perform a global, case-insensitive search for "ain":
-text.match(/ain/gi);
-
-// The matchAll() method returns an iterator containing the results of matching a string against a string (or a regular expression).
-const iterator = text.matchAll(/Cats/gi);
-
-// The includes() method returns true if a string contains a specified value.
-// Otherwise it returns false.
-text.includes("world", 12);
-
-text.startsWith("Hello"); // true
-text.startsWith("world", 5);
-text.endsWith("world", 11);
-
-// Template Literals use back-ticks (``) rather than the quotes ("") to define a string:
-let text = `Hello World!`;
-let text =
-`The quick
-brown fox
-jumps over
-the lazy dog`;
-
-let firstName = "John";
-let lastName = "Doe";
-let text = `Welcome ${firstName}, ${lastName}!`;
-
-let total = `Total: ${(price * (1 + VAT)).toFixed(2)}`;
-
-// HTML Templates
-let header = "Templates Literals";
-let tags = ["template literals", "javascript", "es6"];
-
-let html = `<h2>${header}</h2><ul>`;
-for (const x of tags) {
-  html += `<li>${x}</li>`;
-}
-
-html += `</ul>`;
-
+const myGirls = ["Cecilie", "Lone"];
+const myBoys = ["Emil", "Tobias", "Linus"];
+const myChildren = myGirls.concat(myBoys);
