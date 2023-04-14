@@ -1,5 +1,7 @@
+"use strict";
+
 var kidsWithCandies = function (candies, extraCandies) {
-  let maxOfCandies = Math.max(...candies);
+  const maxOfCandies = Math.max(...candies);
   let result = [];
 
   for (const i of candies) {
