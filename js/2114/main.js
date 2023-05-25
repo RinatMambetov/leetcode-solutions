@@ -1,22 +1,29 @@
 "use strict";
 
-var mostWordsFound = function (sentences) {
-  let max = 0;
-  for (const i of sentences) {
-    let len = i.split(" ").length;
-    max = max > len ? max : len;
-  }
-  return max;
+/**
+ * @param {Function} fn
+ * @param {number} t
+ * @return {Function}
+ */
+var timeLimit = function (fn, t) {
+  return async function (...args) {
+    return new Promise(async (resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject("Time Limit Exceeded");
+      }, t);
+
+      try {
+        const result = await fn(...args);
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      }
+      clearTimeout(timeout);
+    });
+  };
 };
 
-console.log(
-  mostWordsFound([
-    "alice and bob love leetcode",
-    "i think so too",
-    "this is great thanks very much",
-  ])
-); // 6
-
-console.log(
-  mostWordsFound(["please wait", "continue to fight", "continue to win"])
-); // 3
+/**
+ * const limited = timeLimit((t) => new Promise(res => setTimeout(res, t)), 100);
+ * limited(150).catch(console.log) // "Time Limit Exceeded" at t=100ms
+ */
